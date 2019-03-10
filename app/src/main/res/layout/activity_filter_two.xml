@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/root_filter"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="8dp"
+    tools:context=".FilterActivity">
+
+    <TextView
+        android:id="@+id/txv_empresa"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="EMPRESA"
+        android:textColor="@color/colorNormalText"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <android.support.v7.widget.AppCompatSpinner
+        android:id="@+id/spn_empresa"
+        android:layout_width="195dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:dropDownWidth="215dp"
+        android:theme="@style/appCompatSpinnerStyle"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/txv_empresa" />
+
+    <TextView
+        android:id="@+id/txv_estado"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="ESTADO"
+        android:textColor="@color/colorNormalText"
+        app:layout_constraintStart_toStartOf="@id/txv_empresa"
+        app:layout_constraintTop_toBottomOf="@id/spn_empresa" />
+
+    <android.support.v7.widget.AppCompatSpinner
+        android:id="@+id/spn_estado"
+        android:layout_width="195dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:dropDownWidth="195dp"
+        android:theme="@style/appCompatSpinnerStyle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/txv_estado" />
+
+    <TextView
+        android:id="@+id/txv_niveltens"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="NIVEL DE TENSIÓN"
+        android:textColor="@color/colorNormalText"
+        app:layout_constraintStart_toStartOf="@id/txv_estado"
+        app:layout_constraintTop_toBottomOf="@+id/spn_estado" />
+
+    <android.support.v7.widget.AppCompatSpinner
+        android:id="@+id/spn_tension"
+        android:layout_width="195dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:theme="@style/appCompatSpinnerStyle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/txv_niveltens" />
+
+    <TextView
+        android:id="@+id/txv_cantidad"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="CANTIDAD DE SUMINISTRO"
+        android:textColor="@color/colorNormalText"
+        app:layout_constraintStart_toStartOf="@id/txv_niveltens"
+        app:layout_constraintTop_toBottomOf="@id/spn_tension" />
+
+    <EditText
+        android:id="@+id/etx_cantid_inicio"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:hint="Desde..."
+        android:inputType="number"
+        android:maxLines="1"
+        app:layout_constraintEnd_toStartOf="@+id/etx_cantid_fin"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txv_cantidad" />
+
+    <EditText
+        android:id="@+id/etx_cantid_fin"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:hint="Hasta..."
+        android:inputType="number"
+        android:maxLines="1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintStart_toEndOf="@+id/etx_cantid_inicio"
+        app:layout_constraintTop_toBottomOf="@+id/txv_cantidad" />
+
+    <TextView
+        android:id="@+id/txv_label_fecha"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="FECHA"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:textColor="@color/colorNormalText"
+        app:layout_constraintTop_toBottomOf="@id/etx_cantid_fin" />
+
+    <EditText
+        android:id="@+id/etx_fecha_inicio"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:drawableEnd="@drawable/ic_date_range_blue_24dp"
+        android:hint="Fecha inicio"
+        android:inputType="number|textNoSuggestions"
+        android:longClickable="false"
+        android:maxLines="1"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toStartOf="@id/etx_fecha_fin"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/txv_label_fecha" />
+
+    <EditText
+        android:id="@+id/etx_fecha_fin"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:drawableEnd="@drawable/ic_date_range_blue_24dp"
+        android:hint="Fecha fin"
+        android:inputType="number|textNoSuggestions"
+        android:longClickable="false"
+        android:maxLines="1"
+        android:textSize="16sp"
+        app:layout_constraintBaseline_toBaselineOf="@id/etx_fecha_inicio"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintStart_toEndOf="@id/etx_fecha_inicio" />
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="DURACIÓN DE HORAS"
+        android:textColor="@color/colorNormalText"
+        app:layout_constraintStart_toStartOf="@id/txv_niveltens"
+        app:layout_constraintTop_toBottomOf="@id/etx_fecha_fin" />
+
+    <EditText
+        android:id="@+id/etx_durac_inicio"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:hint="Desde..."
+        android:inputType="number"
+        android:maxLines="1"
+        app:layout_constraintEnd_toStartOf="@+id/etx_durac_fin"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView5" />
+
+    <EditText
+        android:id="@+id/etx_durac_fin"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:hint="Hasta..."
+        android:inputType="number"
+        android:maxLines="1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintStart_toEndOf="@+id/etx_durac_inicio"
+        app:layout_constraintTop_toBottomOf="@+id/textView5" />
+
+    <TextView
+        android:id="@+id/txv_elem_elect"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="ELEMENTO ELÉCTRICO"
+        android:textColor="@color/colorNormalText"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/etx_durac_fin" />
+
+    <android.support.v7.widget.AppCompatSpinner
+        android:id="@+id/spn_elem_elect"
+        android:layout_width="195dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:dropDownWidth="215dp"
+        android:theme="@style/appCompatSpinnerStyle"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/txv_elem_elect" />
+
+    <FrameLayout
+        android:id="@+id/fml_overlay"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:alpha="1"
+        android:background="#fff"
+        android:clickable="true"
+        android:focusable="true"
+        android:translationZ="3dp"
+        android:visibility="gone">
+
+        <ProgressBar
+            android:id="@+id/pgb_filter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:indeterminate="true" />
+    </FrameLayout>
+
+</android.support.constraint.ConstraintLayout>
