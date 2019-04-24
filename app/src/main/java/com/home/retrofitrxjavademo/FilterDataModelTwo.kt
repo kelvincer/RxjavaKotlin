@@ -12,9 +12,8 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.functions.BiFunction
 import java.lang.RuntimeException
 
-
 class FilterDataModelTwo {
-    private val TAG = FilterDataModel::class.java.simpleName;
+    private val TAG = FilterDataModelTwo::class.java.simpleName;
     private val service = RetrofitClient.ayudaApiService
     var messageLiveData: MutableLiveData<String> = MutableLiveData()
     var dataLiveData: MutableLiveData<AyudListObject> = MutableLiveData()
@@ -22,20 +21,21 @@ class FilterDataModelTwo {
 
         val compositeDisposable = CompositeDisposable()
         // Tension request
-        val disposable = service?.getAyudaListaData(buildNivelTensionBody(Constants.entityNivelTension))
+        /*val disposable = service?.getAyudaListaData(buildNivelTensionBody(Constants.entityNivelTension))
             ?.subscribeOn(Schedulers.newThread())
-           /* ?.observeOn(AndroidSchedulers.mainThread())*/
+            ?.observeOn(AndroidSchedulers.mainThread())
             ?.subscribe({ response ->
                 manageTensionResponse(response)
             }, { error ->
                 Log.d(TAG, "error filter")
                 messageLiveData.value = "ERROR"
                 error.printStackTrace()
-            }, { Log.d(TAG, "Task completed 1 ") })
+            }, { Log.d(TAG, "Task completed 1 ") })*/
 
         val dispos = Observable.zip(service?.getAyudaListaData(buildEmpresaBody(Constants.entityEmpresa))
-            ?.subscribeOn(Schedulers.newThread()),
+            ?.subscribeOn(Schedulers.newThread())?.observeOn(AndroidSchedulers.mainThread()),
             service?.getAyudaListaData(buildEstadoInterBody(Constants.entityEstadoInterrup))
+                ?.observeOn(AndroidSchedulers.mainThread())
                 ?.subscribeOn(Schedulers.newThread()),
             BiFunction<AyudListResponse, AyudListResponse, Unit> { r, a ->
                 manageEmpresaResponse(r)
@@ -45,7 +45,7 @@ class FilterDataModelTwo {
                         Constants.entityElementoElectrico, getElementJsonData(a.datos.get(0).id)
                     )
                 )?.subscribeOn(Schedulers.io())
-                  /*  ?.observeOn(AndroidSchedulers.mainThread())*/
+                    ?.observeOn(AndroidSchedulers.mainThread())
                     ?.subscribe({ response ->
                         manageElementoResponse(response)
                     }, { error ->
@@ -54,7 +54,7 @@ class FilterDataModelTwo {
                         error.printStackTrace()
                     }, { Log.d(TAG, "Task completed 2") })
 
-            })/*.observeOn(AndroidSchedulers.mainThread())*/
+            }).observeOn(AndroidSchedulers.mainThread())
             /*.subscribeOn(Schedulers.io())*/
             .subscribe({ response ->
                 Log.d(TAG, "response any")
@@ -63,6 +63,17 @@ class FilterDataModelTwo {
                 messageLiveData.value = "ERROR"
                 error.printStackTrace()
             }, { Log.d(TAG, "Task completed 3") })
+
+        val disposable = service?.getAyudaListaData(buildNivelTensionBody(Constants.entityNivelTension))
+            ?.subscribeOn(Schedulers.newThread())
+            ?.observeOn(AndroidSchedulers.mainThread())
+            ?.subscribe({ response ->
+                manageTensionResponse(response)
+            }, { error ->
+                Log.d(TAG, "error filter")
+                messageLiveData.value = "ERROR"
+                error.printStackTrace()
+            }, { Log.d(TAG, "Task completed 1 ") })
     }
 
     private fun getElementJsonData(id: Int): JsonObject {
@@ -74,25 +85,25 @@ class FilterDataModelTwo {
 
     private fun manageElementoResponse(response: AyudListResponse) {
         val elemObject = AyudListObject(response, Constants.entityElementoElectrico)
-        dataLiveData.postValue(elemObject)
+        dataLiveData.value = elemObject;
         Log.d(TAG, "Elemento response: ${Gson().toJson(response)}")
     }
 
     private fun manageEstadoResponse(response: AyudListResponse) {
         val estadoObj = AyudListObject(response, Constants.entityEstadoInterrup)
-        dataLiveData.postValue(estadoObj)
+        dataLiveData.value = estadoObj
         Log.d(TAG, "Estado response: ${Gson().toJson(response)}")
     }
 
     private fun manageTensionResponse(response: AyudListResponse) {
         val tensionObj = AyudListObject(response, Constants.entityNivelTension)
-        dataLiveData.postValue(tensionObj)
+        dataLiveData.value = tensionObj
         Log.d(TAG, "Tension response: ${Gson().toJson(response)}")
     }
 
     private fun manageEmpresaResponse(response: AyudListResponse) {
         val empresaObj = AyudListObject(response, Constants.entityEmpresa)
-        dataLiveData.postValue(empresaObj)
+        dataLiveData.value = empresaObj
         Log.d(TAG, "Empresa response: ${Gson().toJson(response)}")
     }
 

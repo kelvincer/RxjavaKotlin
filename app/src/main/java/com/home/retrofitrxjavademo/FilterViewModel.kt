@@ -34,7 +34,7 @@ class FilterViewModel : ViewModel() {
 
     private fun setupObservers() {
         filterDataModel.messageLiveData.observeForever { s -> messageLiveData.setValue(s) }
-        filterDataModel.dataLiveData.observeForever{
+        filterDataModel.dataLiveData.observeForever {
             ayudaListObjLiveData.value = it
         }
     }
